@@ -69,7 +69,7 @@
                     <img src="../assets/img/fl.jpg" class="img-responsive" alt="reviews2">
                     <div class="content-main single-post padDiv">
                       <div class="journal-txt">
-                        <h4><a href="#">What's Federated Learning and why is it needed?</a></h4>
+                        <h1><a href="#">What's Federated Learning and why is it needed?</a></h4>
                       </div>
                       <div class="post-meta">
                         <ul class="list-unstyled mb-0">
@@ -115,8 +115,7 @@
                       
                       <p class="mb-30"><ul>A mix of the horizontal settings and the vertical settings.
                         An Example where such a setting could be needed is cancer diagnosis system.<br><br> A group of hospitals wants to build an FLS (Federated Learning System)  for cancer diagnosis but each hospital has different patients as well as different kinds of medical examination. In such a case Transfer Federated learning can be a possible solution.</ul></p>
-                        <p class="mb-30"><ul></ul></p>
-                        <h4><br><ul></ul></h4>
+                        
                         <h3>2- Based on the kind of Machine Learning Models chosen for the client</h3>
                         <p class="mb-30">Every Client that's participating in the federated learning system is definitely seeking to apply state-of-the-art models on their local dataset, and based on this model choice, a lot of things in the FLS will be decided, for example choosing the aggregation function.<br>
                           Here are some of the models of architecture that have been used in different Federated Learning systems:</p>
@@ -145,7 +144,59 @@
                         Privacy in FLS is a very broad and important topic that you should pay attention to if you're going to build an FLS one day.
                       </p>
                       <h3>4- Based on Client Types:</h3>
-                    </div>
+                      <p class="mb-30">When it comes to the client types, Federated Learning systems can be categorized into two main types: cross-silo and cross-devise.</p>
+                      <h4><br><ul> - cross-devise:</ul></h4>
+                      <p class="mb-30"><ul>In cross-devise settings, FL is dealing with a huge number of clients -smart phones, IoT devices, etc…-, which can create a large-scale system that can contains a lot of complexity within itself.<br><br>
+
+                        When building an FLS in such setting, one should be careful with what kind of models are they choosing for the client, most of the clients in the cross-device setting wouldn’t have enough computational power to train a heavy model on their local data.<br><br>
+                        
+                        A famous use case for a horizontal and cross-device FLS is Google’s GBoard which is trained on Google’s users’ phones, which was used to conduct next-word prediction.</ul></p>
+                        <h4><br><ul>    - cross-silo:</ul></h4>
+                        <p class="mb-30"><ul></ul></p>
+                        <h4><br><ul></ul></h4>
+                        <p class="mb-30"><ul>The main difference between cross-silo and cross-device is the fact that the client in this case got a much larger amount of data and probably a much stronger computation power, also The number of clients in the FLS in this case is usually significantly smaller.
+                          Client examples: hospital/bank/company.<br>
+                          The example that was in the intro is obviously for a cross-silo FLS.<br><br>
+                          
+                          A famous use case for horizontal and cross-silo FLS is the utilization of FATE -which is an open-source federated learning framework- in Anti Money Laundering, in this case using FL between different banks manged to save those banks more than one thousand cases that needed to be reviewed per day.
+                          </ul></p>
+                      <h2>why is Federated Learning needed?</h2>
+                      <p class="mb-30">I guess by now you can see the importance of using federated learning yourself, but just in case you managed to not notice them, let’s go through some of the main reasons why FL is needed:</p>
+                      <h4><br><ul>  1-Better Data Privacy and Security: </ul></h4>
+                      <p class="mb-30"><ul>Even with the risk that the exchanged model parameters can expose some sensitive information about the client’s data, FL remains far more private than sending the clients’ data to the server, especially in the case where the client is a smartphone or an IoT device, FL, in that case, can minimize the risk of personal data leakage and guarantee better security of the operations.</ul></p>   
+                      <h4><br><ul>  2- Data Diversity : </ul></h4>
+                      <p class="mb-30"><ul>FL can give you a model that can deal with a higher range of data, which can improve the accuracy of the model.<br><br>
+
+                        A very good example of why such a thing is important is AI in the healthcare world, In the real world, as opposed to the clinical trial world, patient populations are large and diverse — young and old, well-off and poor, coming from a range of racial and ethnic backgrounds, and being treated with different protocols depending on time and place. Yet most traditional AI models in health care are developed and trained using datasets that do not reflect the general patient population or the frequent changes in clinical practice.</ul></p>   
+                      <h4><br><ul>  3- Better Scalability and Cost-Efficiency </ul></h4>
+                      <p class="mb-30"><ul>In FLS, data is partitioned and trained across multiple devices, That property allows for 2 things to happen:
+<br><br>
+                        1- Parallelism: The work on the data will be done almost simultaneously by different devices which can accelerate the training of the ML model.
+                        <br><br>
+                        
+                        2- Instead of having to transfer the raw data from the clients to the server, only the parameters will be exchanged and in case of a good privacy protocol that doesn’t add much overhead, this property will reduce the volume of data that has to be transmitted to a network and processed in the cloud.</ul></p>   
+                    <h2>Closure</h2>
+                    <p class="mb-30">Federated Learning can be the solution for a lot of privacy and security problems, it’s still very new but it’s growing steadily and today there are multiple open-source researches and frameworks that can help people who are interested in applying it.</p>
+                        <h2>References:</h2>
+                        <p><a href="https://arxiv.org/abs/1907.09693">1- A Survey on Federated Learning Systems: Vision, Hype and Reality for Data Privacy and Protection</a>
+                        </p>
+                        <p><a href="https://arxiv.org/abs/1908.07873">2- Federated Learning: Challenges, Methods, and Future Directions</a>
+                        </p>
+                        <p><a href="https://arxiv.org/abs/2007.11354">3- A Systematic Literature Review on Federated Machine Learning: From A Software Engineering Perspective</a>
+                        </p>
+                        <p><a href="https://research.google/pubs/pub47586/">4- Federated Learning for Mobile Keyboard Prediction</a>
+                        </p>
+                        <p><a href="https://www.fedai.org/cases/utilization-of-fate-in-anti-money-laundering-through-multiple-banks/">5- https://www.fedai.org/cases/utilization-of-fate-in-anti-money-laundering-through-multiple-banks/</a>
+                        </p>
+                        <p><a href="https://gemmo.ai/federated-learning">6- https://gemmo.ai/federated-learning</a>
+                        </p>
+                        <p><a href="https://blog.openmined.org/federated-learning-types/">7- https://blog.openmined.org/federated-learning-types/</a>
+                        </p>
+                        <p><a href="https://t-dab.ai/benefits-of-federated-learning-explained/">8- https://t-dab.ai/benefits-of-federated-learning-explained/</a>
+                        </p>
+                        <p><a href="https://www.statnews.com/2021/04/30/federated-learning-improve-data-diversity/">9- https://www.statnews.com/2021/04/30/federated-learning-improve-data-diversity/</a>
+                        </p>
+                  </div>
                   </div>
                 </div>
 
