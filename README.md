@@ -4,6 +4,16 @@ This repository powers the GitHub Pages site:
 
 - **Production URL:** https://aml-hassan-abd-el-hamid.github.io/Aml.github.io/
 
+## GitHub Pages domain
+
+This site uses its default GitHub Pages address, not a custom domain. Keep the
+repository free of a `CNAME` file unless configuring a domain you own.
+
+After deploying the removal of the incorrect `CNAME` file, check **Settings >
+Pages > Custom domain** on GitHub. If a domain is still configured, remove it
+and verify that the production URL above opens the portfolio without redirecting
+to another website.
+
 ## Main files to maintain
 
 The portfolio is now data-driven for easy updates:
