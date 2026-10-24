@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX70P7ZG4Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TX70P7ZG4Y');
+  </script>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Clustering bilingual texts -Arabic and English- | Aml Hassan Esmail</title>
+  <meta name="description"
+    content="How I designed a bilingual Arabic-English clustering workflow using embeddings and Louvain community detection.">
+
+  <link href="../assets/img/dev_favicon.ico" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+    rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/portfolio-modern.css" rel="stylesheet">
+</head>
+
+<body data-page="article-bilingual-clustering">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Go to homepage">
+        <span class="brand-mark">AE</span>
+        <span class="brand-name" data-profile-name>Aml Hassan Esmail</span>
+      </a>
+
+      <button class="nav-toggle js-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"
+        aria-label="Toggle menu">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <nav class="site-nav" id="site-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+          <li><a href="../blogs.html" class="active">Articles</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-main section">
+    <div class="container">
+      <article class="article-shell">
+        <div class="article-inner">
+          <p class="article-kicker">NLP and Clustering</p>
+          <h1 class="article-title">Clustering bilingual texts -Arabic and English-</h1>
+          <div class="article-meta">
+            <span class="article-meta-chip"><i class="bi bi-person"></i> Aml Hassan Esmail</span>
+            <span class="article-meta-chip"><i class="bi bi-translate"></i> Arabic and English</span>
+            <span class="article-meta-chip"><i class="bi bi-cpu"></i> CPU-first design</span>
+          </div>
+          <img class="article-cover" src="https://cdn-images-1.medium.com/max/1024/1*8nWvK6vZxqfmZgL4T1FqjA.jpeg"
+            alt="Abstract data background for text clustering" width="1200" height="630">
+
+          <div class="article-body">
+            <p>Currently, I’m working on building a desktop note-taking app, and I wanted to add a feature that can help the user to group similar notes automatically, so I started searching for the best way to group those notes, and I wanted to share my journey with you in this article.</p><p>I wanted an algorithm that could do the following:</p><ul><li>Support two languages: Arabic and English</li><li>Works well in CPU, as most regular users don’t have a very good personal GPU</li></ul><p>Also, to make it easier for me, I put a limit on the number of notes that can be grouped to a maximum of 1k notes.</p><p><strong>Working Plan:</strong></p><ul><li>Settle on clustering algorithms to test.</li><li>Find/Build a test dataset</li><li>Settle on the embedding models to test.</li><li>Compare and choose the fastest and most accurate way.</li></ul><h4>The clustering algorithms:</h4><p>When choosing the clustering algorithm, I needed one with the following criteria: fast, computationally inexpensive, doesn’t need specification of a number of clusters by the user, and has the least amount of hyperparameters that need to be tuned.</p><p>I decided to experiment with <strong>Louvain</strong></p><p>Louvain’s time complexity is usually O(n log n), but since I need to calculate the similarity matrix before using it, and that step takes O(n²), the overall time complexity of the clustering process became O(n²).</p><p>The way it worked is that I calculated the embedding for each text, calculated the cosine similarity matrix for those embeddings, put those texts as nodes inside a graph and created edges between those nodes based on their cosine similarity, and then I used the Louvain algorithm over that graph.</p><p>This algorithm has a few hyperparameters that need to be tuned. For <strong>Louvain,</strong> there’s essentially one main parameter, which is the <strong>resolution</strong> parameter, it controls the size of communities.</p><p>Another hyperparameter that I had to set was the <strong>threshold,</strong> which decides if 2 texts are related or not based on their cosine similarity score; the relationship over here is represented as an edge between the 2 texts.</p><p>If you’re unfamiliar with <strong>Louvain, </strong>this video can be a great intro</p><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FXt0vBtBY2BU%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXt0vBtBY2BU&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FXt0vBtBY2BU%2Fhqdefault.jpg&amp;type=text%2Fhtml&amp;schema=youtube" width="854" height="480" frameborder="0" scrolling="no"><a href="https://medium.com/media/918ebef8b99c1546df10222123552874/href">https://medium.com/media/918ebef8b99c1546df10222123552874/href</a></iframe><p><strong>Note:</strong> I experimented a little bit with <strong>DBSCAN</strong> at the start, but trying to set its hyperparameters automatically was a hellish experience; the most convenient thing about Louvain is the fact that setting its hyperparameters automatically was kinda easy which is really important given the fact that this feature will be run be a user who will probably know nothing about sitting clustering algorithms hyperparameters.</p><h4>The test dataset</h4><p>I built the dataset by:</p><ul><li>Sampling 500 texts with 6 different labels from here <a href="https://www.kaggle.com/datasets/haithemhermessi/sanad-dataset/data?select=Culture">Arabic News Articles Dataset</a>, I made sure that all the categories got different random numbers of samples inside them: Politics: 94, Sports: 110, Finance: 83, Tech: 67, Religion: 66, Medical: 80.<br>I also made sure the text lengths vary across the samples.</li><li>And sampling 500 texts with 6 different labels from here <a href="https://www.kaggle.com/datasets/micchaeelwijaya/news-topics-classification-dataset">News Topics Classification Dataset</a>, I made sure that all the categories got different random numbers of samples inside them: Politics: 50, Sport: 87, Business: 81, Tech: 55, Religion: 169, Entertainment: 58.<br>I also made sure the text lengths vary across the samples</li><li>And then putting the English and Arabic texts that belong to the same category together -considered Business and Finance the same category- and left the Medical category to be only Arabic texts, and the Entertainment category to be only English texts</li></ul><p>The test dataset can be found here: <a href="https://www.kaggle.com/datasets/amlhassan/bilingual-text-clusters/data">bilingual text clusters</a></p><h4>The embedding models</h4><p>Given the fact that the application that I’m building will be mostly dependent on CPU only, I had to choose the lightest models possible, and of course, the model needs to handle Arabic and English.</p><p>Here’s a list of models that I decided to experiment with the models below, They all support Arabic and English, and they are sorted by size from the largest to the smallest. And you can find all the needed information about them from their links:</p><ul><li><a href="https://huggingface.co/sentence-transformers/LaBSE">sentence-transformers/LaBSE · Hugging Face</a> <strong>1.88G</strong></li><li><a href="https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2">sentence-transformers/paraphrase-multilingual-mpnet-base-v2 · Hugging Face</a> <strong>1.1G</strong></li><li><a href="https://huggingface.co/sentence-transformers/distiluse-base-multilingual-cased-v1">https://huggingface.co/sentence-transformers/distiluse-base-multilingual-cased-v1</a> <strong>539M</strong></li><li><a href="https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2">https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</a> <strong>471M</strong></li></ul><h4>Evaluation metrics</h4><p>For this project, I needed 2 types of evaluation metrics:</p><p>One set that was used to automatically choose the values of the hyperparameters for those algorithms, as the user won’t have enough knowledge to choose the values themselves. For that, I depended mainly on <strong>modularity, </strong>it was an easy choice given the fact that the Louvain algorithm is based on the idea of optimising the modularity measure.</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*YICWnP4-eW9evGgvFzYO9A.png" /><figcaption>source: <a href="https://www.youtube.com/watch?v=Xt0vBtBY2BU&amp;ab_channel=Splience">https://www.youtube.com/watch?v=Xt0vBtBY2BU&amp;ab_channel=Splience</a></figcaption></figure><p>Alongside modularity, I also considered the balance score, the largest community percentage of nodes, and the percentage of small communities. However, all those measures had much smaller weights compared to modularity; none of them is multiplied by any weight higher than 0.2 while modularity is multiplied by 1.</p><p>I also used filters on the communities sizes to help with automatically choosing the values of the hyperparameters. If a set of hyperparameters produced communities that got a very large size, for example, one community contains more than 70% of the points, that set of hyperparameters would be ignored. Also, if a set of hyperparameters produced too many small communities, for example, more than 50% of the communities got only 1 or 2 nodes, that set of hyperparameters would be ignored</p><p>The other set of metrics was used to evaluate the clustering process on the test dataset using the labels of the data, that set wouldn’t be available for the user, of course, given that the user won’t probably have the true labels of their clusters, and for that set I picked the following ones:</p><p><strong>ARI: </strong>short for Adjusted Rand Index, measures the exact matching performance, meaning that in order for that to be 1, every pair of nodes that belong to the same true cluster must be in the same predicted cluster, and every pair of nodes that belong to different true clusters must be in different predicted clusters.</p><p><strong>NMI: </strong>short for Normalised Mutual Information, measures the information shared between clusterings, meaning that in order for that to be 1, all the nodes in each true cluster must be assigned to the same predicted cluster, and each predicted cluster must contain only nodes from a single true cluster.</p><p><strong>FMI: </strong>Short for Fowlkes-Mallows Index, handles precision/recall balance in uneven clusters.</p><p><strong>Purity: </strong>ensures clusters contain mostly one class, that one can be deceiving alone, cause if you divide all the nodes into singleton clusters where each one have only one node, you’ll end up with purity =1, that’s why it’s important to use this metric as a side metric not the main one.</p><h3>The final comparison</h3><p>You can find the full code that I run to get those results over here: <a href="https://www.kaggle.com/code/amlhassan/clustering-arabic-and-english-texts-using-louvain">https://www.kaggle.com/code/amlhassan/clustering-arabic-and-english-texts-using-louvain</a></p><p>I made sure to use random seeds and to set the randomize flag from community_louvain.best_partition() to False, to make the results as reproducible as possible.</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*vJZPPAoyRqD5vaUwVR6DJA.png" /></figure><p>In the table above:</p><ul><li>The total time includes the looping over different thresholds and resolution values to find the best ones given the metrics defined in the evaluation section above, while the embedding time, of course, is the time taken by the model to just produce the text embeddings.</li><li>The no.pure clusters is no.of clusters that got over 90% of it from only one class, while no.clusters is the total number of clusters produced by the algorithm.</li></ul><p>I ran the whole code over Kaggle’s CPU, which has 2 cores, and Kaggle also has a RAM that’s around 32 GB.</p><p>Based on my comprehensive testing across four multilingual embedding models and the Louvain clustering algorithm, I found that the <strong>paraphrase-multilingual-mpnet-base-v2</strong> model gave me the optimal balance of accuracy and performance. While this 1.1GB model isn’t the smallest option indeed 😑, it got the highest scores across most key metrics (ARI: 0.71, NMI: 0.76, FMI: 0.76, Purity: 0.85) and produced 7 clusters where 4 of them were over 90% pure.</p><p>For practical implementation in my note-taking application, this approach offers several advantages:</p><ul><li>First, it accurately groups related content across both Arabic and English without requiring language detection as a preprocessing step.</li><li>Second, with an embedding time of just <strong>174</strong> seconds for 1,000 notes on a modest 2-core CPU, I think the time is not so bad, I think a user can wait around 2 and a half minutes to get a proper clustering of 1,000 nodes over their CPU!</li><li>Finally, the automatic hyperparameter selection process means users won’t need technical expertise to achieve high-quality clustering results.</li></ul><p>Future improvements could include:</p><ul><li>Testing the code on a RAM with less than 32GB of memory</li><li>Try Onnx, openVinew backend and quantisation to speed up the embedding part.</li></ul><p>If you made it till here, I just wanna thank you so much for your patience, and if you got any positive or negative feedback, please leave it in the comments.</p><p>BYE 👋</p><h4>References:</h4><ul><li><a href="https://spotintelligence.com/2023/01/17/text-clustering-algorithms/">Top 6 Most Popular Text Clustering Algorithms And How They Work</a></li><li><a href="https://towardsdatascience.com/louvains-algorithm-for-community-detection-in-python-95ff7f675306/">Louvain’s Algorithm for Community Detection in Python | Towards Data Science</a></li><li><a href="https://medium.com/@vivekvjnk/understanding-leiden-vs-louvain-clustering-hierarchy-and-subset-properties-4d4e9c03a9f9">Understanding Leiden vs Louvain Clustering: Hierarchy and Subset Properties | by Story_Teller | Medium</a></li><li><a href="https://www.sbert.net/docs/sentence_transformer/pretrained_models.html">Pretrained Models — Sentence Transformers documentation</a></li><li><a href="https://www.geeksforgeeks.org/clustering-metrics/">Clustering Metrics in Machine Learning | GeeksforGeeks</a></li><li><a href="https://towardsdatascience.com/evaluation-metrics-for-clustering-models-5dde821dd6cd/">https://towardsdatascience.com/evaluation-metrics-for-clustering-models-5dde821dd6cd/</a></li></ul>
+          
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">(c) <span data-current-year></span> <span data-profile-name>Aml Hassan Esmail</span>. All
+        rights reserved.</p>
+      <div class="footer-social">
+        <a data-github-url href="https://github.com/Aml-Hassan-Abd-El-hamid" target="_blank" rel="noopener noreferrer"
+          aria-label="GitHub">
+          <i class="bi bi-github"></i>
+        </a>
+        <a data-linkedin-url href="https://www.linkedin.com/in/aml-hassan-esmail/" target="_blank"
+          rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a data-medium-url href="https://medium.com/@amlhassanabdelhamid" target="_blank" rel="noopener noreferrer"
+          aria-label="Medium">
+          <i class="bi bi-medium"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="back-to-top" href="#" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <script defer src="../assets/js/portfolio-data.js"></script>
+  <script defer src="../assets/js/portfolio-site.js"></script>
+</body>
+
+</html>

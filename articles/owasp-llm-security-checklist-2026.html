@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX70P7ZG4Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TX70P7ZG4Y');
+  </script>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>OWASP Top 10 for LLM Apps (2026): My 14-Point Security Checklist | Aml Hassan Esmail</title>
+  <meta name="description"
+    content="A practical 14-point checklist for building safer LLM-powered applications, based on the OWASP GenAI LLM Top 10 (2026).">
+
+  <link href="../assets/img/dev_favicon.ico" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+    rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/portfolio-modern.css" rel="stylesheet">
+</head>
+
+<body data-page="article-owasp-llm-checklist">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Go to homepage">
+        <span class="brand-mark">AE</span>
+        <span class="brand-name" data-profile-name>Aml Hassan Esmail</span>
+      </a>
+
+      <button class="nav-toggle js-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"
+        aria-label="Toggle menu">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <nav class="site-nav" id="site-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+          <li><a href="../blogs.html" class="active">Articles</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-main section">
+    <div class="container">
+      <article class="article-shell">
+        <div class="article-inner">
+          <p class="article-kicker">LLM Security</p>
+          <h1 class="article-title">OWASP Top 10 for LLM Apps (2026): My 14-Point Security Checklist</h1>
+          <div class="article-meta">
+            <span class="article-meta-chip"><i class="bi bi-person"></i> Aml Hassan Esmail</span>
+            <span class="article-meta-chip"><i class="bi bi-calendar3"></i> Draft - 2026</span>
+            <span class="article-meta-chip"><i class="bi bi-shield-check"></i> OWASP GenAI</span>
+          </div>
+          <img class="article-cover" src="../assets/img/data-background2.jpg"
+            alt="Security-themed abstract background for LLM application safety checklist" width="1200" height="630">
+
+          <div class="article-body">
+            <p>I started this article while reading the OWASP Top 10 for LLM Applications 2026, I was trying to learn more about how to make a secure LLM powered applications.<br>The OWASP Top 10 for LLM Applications 2026 is a collection of 10 articles that discuss 10 different security issues related to LLM-powered applications, each article contains an issue and a list of strategies to help prevent that issue.<br>I was taking notes while reading to try and build a ToDo list of elements to check every time I build an LLM-powered app to make sure it follows the basic security rules, and ones the list was done I decided to share it so others can use it, I still highly recommend reading the full ten articles to get to know more about each security issue in details, You can download the PDF that contains the articles from here: <a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/">OWASP GenAI LLM Top 10 2026 - OWASP Gen AI Security Project</a><br>I divided my list into 4 buckets with 14 points -a lot of points, I know :) - I discuss every point below but you can see the entire list with no details here here:</p>
+            <ul class="quick-bucket-list">
+              <li>
+                <strong>Access:</strong>
+                <ol class="quick-bucket-points">
+                  <li><strong>Least Privilege / Minimize Scope, Tools &amp; Permissions and enforce that</strong></li>
+                  <li><strong>Server-Side, Chunk/Tenant-Level Access Control for Retrieval (RAG/Vector)</strong></li>
+                  <li><strong>Human-in-the-Loop Approval for High-Impact/Irreversible Actions</strong></li>
+                  <li><strong>Sandboxing &amp; Isolation of Untrusted Data/Tools/Execution</strong></li>
+                </ol>
+              </li>
+              <li>
+                <strong>Input:</strong>
+                <ol class="quick-bucket-points" start="5">
+                  <li><strong>No Secrets or Sensitive Data in Prompts/Hidden Context</strong></li>
+                  <li><strong>Input Validation &amp; Sanitization</strong></li>
+                  <li><strong>Trust-Boundary Separation &amp; Provenance Labeling</strong></li>
+                </ol>
+              </li>
+              <li>
+                <strong>Output:</strong>
+                <ol class="quick-bucket-points" start="8">
+                  <li><strong>Output Schema Validation, Encoding &amp; Safe Rendering</strong></li>
+                  <li><strong>Grounding / Verify-Before-Act (Claim-Check-Act)</strong></li>
+                </ol>
+              </li>
+              <li>
+                <strong>Operational &amp; Governance Controls:</strong>
+                <ol class="quick-bucket-points" start="10">
+                  <li><strong>Rate Limiting, Quotas &amp; Spending/Resource Caps</strong></li>
+                  <li><strong>Know &amp; Verify What You&#x27;re Building On</strong></li>
+                  <li><strong>Test Your Defenses Like an Attacker Would</strong></li>
+                  <li><strong>Monitoring, Logging, Anomaly Detection &amp; Incident Response</strong></li>
+                  <li><strong>Protect Your Data Wherever It Goes</strong></li>
+                </ol>
+              </li>
+            </ul>
+            <h3>Access:</h3>
+            <ol class="security-point-list">
+              <li class="security-point">
+                <h4>Least Privilege / Minimize Scope, Tools &amp; Permissions and enforce that</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>That practice is useful to minimize the damage that can be caused by a prompt injection as even if there were malicious orders sneaked into the input of the LLM, it won&#x27;t be that harmful because the LLM doesn&#x27;t have enough leverage to cause major damage, and it also guards against unbounded consumption as this practice limits how much damage a runaway loop or recursive call can actually do, even if it fires thousands of times.<br>Narrowing access only helps if that boundary is actually enforced: if the LLM itself is trusted to decide whether a specific action is appropriate, a convincing injection or hallucination can still talk it into misusing the access it does have. That check needs to happen in your own application code every time a tool is called, not in the model&#x27;s judgment.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>Replace broad tools (e.g., a generic &quot;run shell command&quot; or &quot;fetch any URL&quot; tool) with narrow, single-purpose ones, i.e. a tool that only writes to one designated file, not one that can run arbitrary commands.</li>
+              <li>Give the model&#x27;s DB connection a read-only role on only the tables it needs, not full read/write access to the whole schema.</li>
+              <li>Add a deterministic policy check in front of every tool call that re-validates the action&#x27;s arguments and authorization at execution time - don&#x27;t let the model&#x27;s decision to call the tool be the only thing standing between it and the action.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Server-Side, Chunk/Tenant-Level Access Control for Retrieval (RAG/Vector)</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>This is actually complementary to point 1, Not only the LLM must have a minimized scope, also the retriever of your system must be bounded. That practice can help prevent sensitive information disclosure.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>In a multi-tenant RAG app, filter by tenant ID as part of the vector-database query itself (a metadata filter or <code>WHERE tenant_id = X</code> clause passed into the search call), not by retrieving results for everyone and discarding the wrong-tenant ones afterward.</li>
+              <li>Apply access control at the chunk level, not just the document level - a mostly-public policy document with one confidential paragraph should have that paragraph excluded from the index an unauthorized user can query, not rely on whole-document permissions that assume uniform sensitivity.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Human-in-the-Loop Approval for High-Impact/Irreversible Actions</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>Human approval can guard against irreversible damage that can be caused by hallucination from the LLM or in case of a prompt injection managing to pass malicious orders to the LLM.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>An agent that can send emails or post to social media on a user&#x27;s behalf drafts the message and shows it to the user, requiring an explicit &quot;send&quot; confirmation rather than posting automatically.</li>
+              <li>A coding/ops agent that can run destructive commands (deleting files, dropping a database table) pauses and asks for developer confirmation before executing anything irreversible, instead of auto-running it.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Sandboxing &amp; Isolation of Untrusted Data/Tools/Execution</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>That practice is very important especially in cases where there&#x27;s possible code execution. It limits the damage from a hallucination (non-existing packages/bad code) and the damage that can be done by a prompt injection. Because even if something bad gets generated or injected, it runs in an isolated environment with limited access to secrets, the filesystem, or the network, rather than directly on your production system.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>Restrict generated code to a fixed, pre-approved list of allowed packages/functions (validated via an AST check before execution, not just a runtime try/catch), so even if the LLM hallucinates or suggests a non-existent package, it gets rejected before anything runs.</li>
+              <li>Isolate LLM-Generated Code Execution: Run the generated code in an isolated subprocess with execution timeouts. For production-grade isolation, use containers or VMs with enforced CPU and memory limits, rather than relying on subprocesses alone, which still share the host&#x27;s kernel and can be escaped or exhaust shared resources.</li>
+              <li>Restrict Sandbox Network Access: Allow access only to approved external APIs, and explicitly block requests to internal services, private IP addresses, and cloud metadata endpoints to prevent unauthorized access to internal resources (SSRF).</li>
+            </ul>
+            </li>
+            </ol>
+            <h3>Input:</h3>
+            <ol class="security-point-list" start="5">
+              <li class="security-point">
+                <h4>No Secrets or Sensitive Data in Prompts/Hidden Context</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>Including any secrets, credentials or API keys in the system prompts introduces two issues:</p>
+            <ul>
+              <li>If you are using an LLM via an API, then your sensitive information is exposed to the API provider.</li>
+              <li>In case of the system prompt leaks to the user -can be done because of LLM hallucination or prompt injection-, your sensitive data will be in the hands of the wrong people.</li>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>Instead of hardcoding an API key or database credential directly into the system prompt, store it in a secrets manager (environment variables, Vault, AWS Secrets Manager) and keep it entirely out of any text the model sees.</li>
+              <li>If the model needs a tool that requires a credential (e.g., a database password), handle the authentication in your application code / tool-calling layer so the LLM should only ever see &quot;call tool X with argument Y,&quot; never the actual credential value.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Input Validation &amp; Sanitization</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>That practice is important to prevent dangers like prompt injection and unintended uses of your application, since it lets you classify the intent of a user&#x27;s input and check whether it matches an intended use case for your app.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>A user asks a medical-assistant app for a diagnosis of their symptoms, something the app shouldn&#x27;t provide, since a wrong diagnosis could expose the company to liability. An intent classifier can detect this kind of request and block or redirect it before the model responds.</li>
+              <li>Pair OCR with a text/intent classifier on image inputs, so if a user uploads an image containing hidden malicious instructions, the extracted text still gets scanned for injection attempts before it reaches the model, the same way a normal text input would.</li>
+              <li>Regex/pattern matching can be paired with an intend classifier as a cheap first-pass filter for obvious attack signatures, for example:</li>
+              <li>Catching known jailbreak phrases like (&quot;ignore previous instructions&quot;).</li>
+              <li>Suspicious long base64-looking blobs, or unexpected character encodings.</li>
+              <li>Flag suspicious invisible characters, with normalization tailored to the languages your app supports.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Trust-Boundary Separation &amp; Provenance Labeling</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>This is different from point 1: point 1 limits what the LLM is allowed to do even if it gets manipulated, while this point is about preventing the manipulation itself.<br>The problem is that an LLM can&#x27;t naturally tell an instruction apart from data, since both are just tokens to it, so a prompt injection hidden in a retrieved document or web page looks exactly like a real command.<br>By structurally separating external content from the system prompt, and labeling where that content came from, you make it harder for injected text to be mistaken for a legitimate instruction.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>When a RAG system retrieves documents to answer a question, wrap the retrieved content in clearly delimited tags (e.g., <code>&lt;retrieved<em>document source=&quot;...&quot;&gt;...&lt;/retrieved</em>document&gt;</code>) and instruct the model to treat anything inside as data to reference, never as commands to follow.</li>
+              <li>Track where every piece of retrieved content came from (source, ingestion time, trust tier), so if a document later turns out to be malicious, you can trace and invalidate everything pulled from that source, instead of only knowing that <em>something, somewhere</em> was bad.</li>
+            </ul>
+            </li>
+            </ol>
+            <h3>Output</h3>
+            <ol class="security-point-list" start="8">
+              <li class="security-point">
+                <h4>Output Schema Validation, Encoding &amp; Safe Rendering</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>This practice is extremely important for many reasons:</p>
+            <ul>
+              <li>If malicious instructions get past the input defenses, we can still catch the damage at the output stage, checking whether the response leaks secrets or does something outside the intended use of the app.</li>
+              <li>If the LLM hallucinates an incomplete, incorrect, or nonsensical output, validating it lets us catch that and retry instead of passing garbage downstream.</li>
+              <li>Even when nothing malicious happened upstream, treating the model&#x27;s output as automatically safe to render or execute is risky on its own as it can still contain something that looks like a script tag or a SQL fragment, and if that&#x27;s passed straight into a browser, database, or shell without encoding, it&#x27;s enough to trigger XSS, SQL injection, or command execution, regardless of what caused it.  </li>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>Validate the LLM&#x27;s output against a strict schema (JSON structure, expected fields) in application code before using it and if it doesn&#x27;t match, reject and retry instead of passing a bad response downstream. </li>
+              <li>Before rendering LLM output in a web page, apply context-aware encoding: </li>
+              <li>HTML-encode for an HTML context</li>
+              <li>JS-encode if it&#x27;s inserted into a script block, so a stray <code>&lt;script&gt;</code> tag or quote character in the model&#x27;s text can&#x27;t execute as code in the browser.</li>
+              <li>The app uses predefined, parameterized queries, with model-provided values passed separately.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Grounding / Verify-Before-Act (&quot;Claim-Check-Act&quot;)</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>This practice can help guard against misinformation, since it forces any claim to be checked against a real, current source before the system treats it as true or acts on it.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>An agent about to approve a refund based on a claim like &quot;the customer&#x27;s order was never delivered&quot; should check the actual shipment/tracking record before acting, not act on the model&#x27;s restated claim alone.</li>
+              <li>A support bot answering &quot;what&#x27;s our return policy?&quot; should pull the current policy document via retrieval and ground its answer in that actual text, rather than relying on what it remembers from training, which could be outdated or simply wrong.</li>
+            </ul>
+            </li>
+            </ol>
+            <h3>Operational &amp; Governance Controls</h3>
+            <ol class="security-point-list" start="10">
+              <li class="security-point">
+                <h4>Rate Limiting, Quotas &amp; Spending/Resource Caps</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>That practice is really important in case the input and output defenses against hallucinations and prompt injections fail, Having strict, reasonable budgets can limit the damage from potentially millions of dollars down to just a couple hundred.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>If a request triggers a loop that keeps calling the model over and over, a hard, non-overridable spending cap per API key/user can stop it in its tracks, a simple alert might not get seen until the damage is already done.</li>
+              <li>A single agent stuck in a recursive tool-calling loop can burn through a budget in seconds, even with a per-user spending limit already in place, a step/recursion limit on the agent&#x27;s own run catches that specific failure mode.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Know &amp; Verify What You&#x27;re Building On</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>This practice can help guard against attackers who tamper with packages/models/datasets/websites. You have to check every element used in you application and verify that it&#x27;s coming from a trusted resource as everything can be manipulated.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>Random HuggingFace models can include hidden biases, backdoors, or other malicious features, you have to verify that the publisher of that model is trust-worthy before using it in your application.</li>
+              <li>Public datasets on Kaggle and other websites can be modified or poisoned between versions and a model that fine-tuned on it can pick up hidden biases or backdoors without anyone noticing, so be careful when choosing your data.</li>
+              <li>Before trusting an external website as a data source (e.g., a RAG pipeline pulling from the web), vet it the same way you&#x27;d vet a supplier: reputation, terms of service, track record, rather than treating every site as equally trustworthy by default.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Test Your Defenses Like an Attacker Would</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>You might need a help from a friend on this one! A defense that only gets tested against attacks it already knows about will look solid on paper but fail against a real attacker who studies your system first. Testing your own app the way an attacker actually would is the only way to know if those defenses actually hold up, instead of just assuming they do.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>Test your prompt-injection filters against attacks that already know your rules, not just ones that don&#x27;t, if it still holds up even when the attacker knows exactly how it works, it&#x27;s actually solid.   </li>
+              <li>Before using a third-party model, test it yourself with prompts related to your specific use case, not just generic benchmarks, a model can pass a popular benchmark and still fail at your actual task.</li>
+              <li>Regularly test a deployed model with unusual or suspicious inputs to check for hidden backdoors, a backdoor stays silent until it sees its specific trigger, so normal use won&#x27;t reveal it.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Monitoring, Logging, Anomaly Detection &amp; Incident Response</h4>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>That practice is really important to know what happened/happening within your application, documenting every detail helps you figure out how to get better and how to catch issues within your app including -but not limited to- model performance degradation. It&#x27;s also what lets you catch an attack early, like an unusual spike in tool calls or resource use, and investigate exactly what happened afterward, instead of only finding out once the damage is already done.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>A sudden, unexplained spike in tool calls or token usage from one session can be the first sign of a recursive loop or an attack in progress, catching that pattern in real time lets you intervene before the costs, or the damage, pile up.</li>
+              <li>An unusually high volume of near-identical queries against a retrieval/embedding endpoint can be a sign someone&#x27;s trying to extract your underlying data, flagging that pattern catches an extraction attempt that a single request wouldn&#x27;t reveal on its own.</li>
+            </ul>
+            </li>
+              <li class="security-point">
+                <h4>Protect Your Data Wherever It Goes</h4>
+            <p><em>Mentions: LLM02 Tier1 #7, Tier3 #1; LLM04 #7; LLM09 #5</em></p>
+            <ul>
+              <li><strong>Why:</strong></li>
+            </ul>
+            <p>Encrypt sensitive data wherever it&#x27;s stored or sent, and use confidential computing when it also needs protection during processing. These protections work alongside access controls and input/output defenses, not instead of them.</p>
+            <ul>
+              <li><strong>Examples of what this could look like:</strong></li>
+              <li>Chat histories, uploaded documents, and backups stored with encryption enabled.</li>
+              <li>HTTPS connections between your app, model API, and tools.</li>
+              <li>Encryption keys kept in a key manager rather than in code.</li>
+            </ul>
+            </li>
+            </ol>
+            <p>If you got to the end of the article, then I want to congratulate you and say thank you so much, I know that those are lots of points to go through :) I hope you enjoyed reading them and I hope that this list can be helpful for you. If you got any points that you want to add or have any comments or feedbacks, please let me know<br>My LinkedIn: <a href="https://www.linkedin.com/in/aml-hassan-esmail/">Aml Hassan Esmail | LinkedIn</a><br>My email: aml.hassan.esmil@gmail.com</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> <span data-profile-name>Aml Hassan Esmail</span>. Built for fast iteration and
+        clean storytelling.</p>
+      <div class="footer-socials">
+        <a data-linkedin-url href="https://www.linkedin.com/in/aml-hassan-esmail/" target="_blank"
+          rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a data-medium-url href="https://medium.com/@amlhassanabdelhamid" target="_blank" rel="noopener noreferrer"
+          aria-label="Medium">
+          <i class="bi bi-medium"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="back-to-top" href="#" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <script defer src="../assets/js/portfolio-data.js"></script>
+  <script defer src="../assets/js/portfolio-site.js"></script>
+</body>
+
+</html>

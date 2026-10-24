@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX70P7ZG4Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TX70P7ZG4Y');
+  </script>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>What's Federated Learning and why is it needed? | Aml Hassan Esmail</title>
+  <meta name="description"
+    content="A practical introduction to federated learning, why it matters, how it works, and common categories of FL systems.">
+
+  <link href="../assets/img/dev_favicon.ico" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+    rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/portfolio-modern.css" rel="stylesheet">
+</head>
+
+<body data-page="article-federated">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Go to homepage">
+        <span class="brand-mark">AE</span>
+        <span class="brand-name" data-profile-name>Aml Hassan Esmail</span>
+      </a>
+
+      <button class="nav-toggle js-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"
+        aria-label="Toggle menu">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <nav class="site-nav" id="site-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+          <li><a href="../blogs.html" class="active">Articles</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-main section">
+    <div class="container">
+      <article class="article-shell">
+        <div class="article-inner">
+          <p class="article-kicker">Machine Learning</p>
+          <h1 class="article-title">What's Federated Learning and why is it needed?</h1>
+          <div class="article-meta">
+            <span class="article-meta-chip"><i class="bi bi-person"></i> Aml Hassan Esmail</span>
+            <span class="article-meta-chip"><i class="bi bi-calendar3"></i> Sep 2023</span>
+            <span class="article-meta-chip"><i class="bi bi-diagram-3"></i> Privacy-preserving ML</span>
+          </div>
+          <img class="article-cover" src="https://cdn-images-1.medium.com/max/885/1*Z_oYE6zulr9G9TVOz8cmkg.jpeg" alt="Federated learning illustration" width="1200"
+            height="630">
+
+          <div class="article-body">
+            <p>Federated Learning (FL) is a machine-learning setting that can let different entities cooperate to create a powerful shared model without having to share their private data.</p><p>Let’s look at an example of a federated learning system and why would you build one:</p><p>Let’s you are a lovely company/bank/hospital, and you got some amount of data but you want your model to see more data and different patterns of data hoping that this can make your model perform better and be less biased.</p><p>so you go for another company/bank/hospital and you ask to show their data to your model, promising them that you’re not some evil witch,<br>but even though you’re a respectful entity, they still can’t show their data to your model for so many reasons.</p><p>So what to do 🤔</p><p>well, some say that in this particular case, FL would be a very good solution.</p><p>In simple terms this is how federated learning would be done in this case:</p><p><strong>Ingredients</strong>:</p><p>- Nice server: we can call it a federated server.<br>- Aggregation algorithm.<br>- A global model with some random starting weights.</p><p><strong>Steps</strong>:</p><p>1- federated server sends a global model to each entity.</p><p>2- each entity trains the global model on its data, extracts the model’s new weights and sends those weights to the federated server.</p><p>3- the federated server uses the aggregation algorithm to aggregate the weights that it got from each entity — can simply just take their mean- and assign the resulted weight to the global model and send it back to the entities.</p><p>4- repeat 🔁 2,3 until you get a nice convergence.</p><p>And bam, now you got a powerful model that can benefit your company/bank/hospital and benefit others, that model is less biased, and more powerful than the model that you could build on your limited data.</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1000/1*E9u9OE5WTVBwC9gE2w7TDQ.png" /><figcaption>1Figure1: general structure of federated learning system</figcaption></figure><p>There are a lot of flavors for federated learning, and the one that we talked about in the example above is called cross-silo horizontal federated learning. The steps and ingredients that we talked about above could be slightly modified to be used in horizontal cross-device settings.</p><h3>Federated learning Systems can be categorized in so many ways:</h3><h4>1- Based on the kind of Data Partitioning:</h4><p>Based on how data are distributed over the sample and feature spaces across the different clients, FLS can be categorized into 3 main categories</p><ul><li><strong>Horizontal federated learning:</strong></li></ul><p>In this FL setting, all the clients have the same feature space aka the same column names, but all of them got different samples, an example of that is 2 banks that collect the same kind of features about their clients (account number, time of transactions, merchant name, merchant State<strong>,</strong>…..) and each of them got different customers.</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*Jk080SdtHhjIRPTEQoY2-w.png" /><figcaption>Figure 2. Example of what data could look like in horizontal federated learning settings made on Canva</figcaption></figure><p>Most of the available work in the federated learning literature is done on Horizontal FL.</p><ul><li><strong>Vertical federated learning:</strong></li></ul><p>In this FL setting, all the clients have the same samples but different feature spaces aka different column names, an example of that can be 2 hospitals, both of those hospitals got data on the same group of patients, but that data differs in its nature, hospital 1 got the results for the x-ray and CT scan</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*x9eiYFPJ7vPU87x3flDfCw.png" /><figcaption>Figure 3. Example of what data could look like in vertical federated learning settings made on Canva</figcaption></figure><ul><li><strong>Transfer Federated Learning</strong></li></ul><p>A mix of the horizontal settings and the vertical settings.</p><p>An Example where such a setting could be needed is cancer diagnosis system. A group of hospitals wants to build an FLS (Federated Learning System) for cancer diagnosis but each hospital has different patients as well as different kinds of medical examination. In such a case Transfer Federated learning can be a possible solution.</p><h4>2- Based on the kind of Machine Learning Models chosen for the client:</h4><p>Every Client that’s participating in the federated learning system is definitely seeking to apply state-of-the-art models on their local dataset, and based on this model choice, a lot of things in the FLS will be decided, for example choosing the aggregation function.</p><p>Here are some of the models of architecture that have been used in different Federated Learning systems:</p><ul><li><strong>NN Based Models:</strong></li></ul><p>Neural Network (NN) based models are one of the most famous model architectures used in FLS, They achieve very good results in many tasks such as image classification, Fraud detection, word prediction etc……..</p><p>There are a lot of aggregation functions that can deal with this kind of architecture, The most famous one is FedAvg.</p><ul><li><strong>Tree Based Models:</strong></li></ul><p>Tree-based models are one of the most famous machine learning models especially when it comes to dealing with tabular datasets. They’re computationally power-friendly and easy to interpret compared with NN-based models.</p><p>There are multiple tree-based models that’ve been explored in the FL world including Decision Trees, Random Forests, gradient-boosting decision trees (GBDT), XGBoost etc…..</p><ul><li><strong>Linear Models:</strong></li></ul><p>Classic linear models (including linear regression, logistic regression, SVM,…..) are famous models that are usually used a lot because they are very easy to understand.</p><p><strong>Note:</strong> Most of the currently available FL frameworks are built to deal with stochastic gradient descent which is a classic optimization algorithm that’s used to train NN-based models, logistic regression, etc…..</p><h4>3- Based on Privacy Mechanisms:</h4><p>One of the most important things when it comes to building an FLS is to make sure that the data of each client is safe and private. <br>You may think that given that the clients’ data aren’t exposed to the server they are safe and private.<br>But in reality, the exchanged model parameter between the server and the clients can expose sensitive information about the clients’ data.</p><p>There are two main categories for privacy in FLS: global privacy and local privacy.</p><p>In Global Privacy we assume the existence of a trust-worthy server, so the updates from each client are sent to the server without any added privacy them, then The server should privatize those updates to keep them safe from any untrusted third party.</p><p>In Local Privacy, even the server itself can’t see the raw updates.</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*0aJQ1aQCZD-MNfEdxD5qOg.png" /><figcaption>Figure 4. Different privacy mechanisms used in FLS for one round, M<br>is a randomized function used to privatize the data.</figcaption></figure><p>Building a privacy guarantee algorithm for FLS faces a lot of challenges as this algorithm needs:</p><ul><li>to be computationally cheap.</li><li>to be communication-efficient, some algorithms can cause an overhead on the communication process between the clients and server, and such a thing can be a true burden to the FLS.</li><li>to be tolerant to dropped clients -those who can’t communicate to the server in the current round-</li><li>not to overly affect the accuracy -or whatever metric you choose for your system- of the system.</li></ul><p>Privacy in FLS is a very broad and important topic that you should pay attention to if you’re going to build an FLS one day.</p><h4>4- Based on Client Types:</h4><p>When it comes to the client types, Federated Learning systems can be categorized into two main types: cross-silo and cross-devise.</p><ul><li><strong>cross-devise:</strong></li></ul><p>In cross-devise settings, FL is dealing with a huge number of clients -smart phones, IoT devices, etc…-, which can create a large-scale system that can contains a lot of complexity within itself.</p><p>When building an FLS in such setting, one should be careful with what kind of models are they choosing for the client, most of the clients in the cross-device setting wouldn’t have enough computational power to train a heavy model on their local data.</p><p>A famous use case for a horizontal and cross-device FLS is Google’s GBoard which is trained on Google’s users’ phones, which was used to conduct next-word prediction.</p><ul><li><strong>cross-silo:</strong></li></ul><p>The main difference between cross-silo and cross-device is the fact that the client in this case got a much larger amount of data and probably a much stronger computation power, also The number of clients in the FLS in this case is usually significantly smaller.<br>Client examples: hospital/bank/company.<br>The example that was in the intro is obviously for a cross-silo FLS.</p><p>A famous use case for horizontal and cross-silo FLS is the utilization of FATE -which is an open-source federated learning framework- in Anti Money Laundering, in this case using FL between different banks manged to save those banks more than one thousand cases that needed to be reviewed per day.</p><h3>why is Federated Learning needed?</h3><p>I guess by now you can see the importance of using federated learning yourself, but just in case you managed to not notice them, let’s go through some of the main reasons why FL is needed:</p><p><strong>1-Better Data Privacy and Security:</strong></p><p>Even with the risk that the exchanged model parameters can expose some sensitive information about the client’s data, FL remains far more private than sending the clients’ data to the server, especially in the case where the client is a smartphone or an IoT device, FL, in that case, can minimize the risk of personal data leakage and guarantee better security of the operations.</p><p><strong>2- Data Diversity :</strong></p><p>FL can give you a model that can deal with a higher range of data, which can improve the accuracy of the model.</p><p>A very good example of why such a thing is important is AI in the healthcare world, In the real world, as opposed to the clinical trial world, patient populations are large and diverse — young and old, well-off and poor, coming from a range of racial and ethnic backgrounds, and being treated with different protocols depending on time and place. Yet most traditional AI models in health care are developed and trained using datasets that do not reflect the general patient population or the frequent changes in clinical practice.</p><p><strong>3- Better Scalability and Cost-Efficiency</strong></p><p>In FLS, data is partitioned and trained across multiple devices, That property allows for 2 things to happen:</p><p>1- Parallelism: The work on the data will be done almost simultaneously by different devices which can accelerate the training of the ML model.</p><p>2- Instead of having to transfer the raw data from the clients to the server, only the parameters will be exchanged and in case of a good privacy protocol that doesn’t add much overhead, this property will reduce the volume of data that has to be transmitted to a network and processed in the cloud.</p><h3>Closure</h3><p>Federated Learning can be the solution for a lot of privacy and security problems, it’s still very new but it’s growing steadily and today there are multiple open-source researches and frameworks that can help people who are interested in applying it.</p><p><strong>References:</strong></p><p>1- <a href="https://arxiv.org/abs/1907.09693">A Survey on Federated Learning Systems: Vision, Hype and Reality for Data Privacy and Protection</a></p><p>2- <a href="https://arxiv.org/abs/1908.07873">Federated Learning: Challenges, Methods, and Future Directions</a></p><p>3- <a href="https://arxiv.org/abs/2007.11354">A Systematic Literature Review on Federated Machine Learning: From A Software Engineering Perspective</a></p><p>4- <a href="https://research.google/pubs/pub47586/">Federated Learning for Mobile Keyboard Prediction</a></p><p>5- <a href="https://www.fedai.org/cases/utilization-of-fate-in-anti-money-laundering-through-multiple-banks/">https://www.fedai.org/cases/utilization-of-fate-in-anti-money-laundering-through-multiple-banks/</a></p><p>6- <a href="https://gemmo.ai/federated-learning">https://gemmo.ai/federated-learning</a></p><p>7- <a href="https://blog.openmined.org/federated-learning-types/">https://blog.openmined.org/federated-learning-types/</a></p><p>8- <a href="https://t-dab.ai/benefits-of-federated-learning-explained/">https://t-dab.ai/benefits-of-federated-learning-explained/</a></p><p>9- <a href="https://www.statnews.com/2021/04/30/federated-learning-improve-data-diversity/">https://www.statnews.com/2021/04/30/federated-learning-improve-data-diversity/</a></p>
+          
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">(c) <span data-current-year></span> <span data-profile-name>Aml Hassan Esmail</span>. All
+        rights reserved.</p>
+      <div class="footer-social">
+        <a data-github-url href="https://github.com/Aml-Hassan-Abd-El-hamid" target="_blank" rel="noopener noreferrer"
+          aria-label="GitHub">
+          <i class="bi bi-github"></i>
+        </a>
+        <a data-linkedin-url href="https://www.linkedin.com/in/aml-hassan-esmail/" target="_blank"
+          rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a data-medium-url href="https://medium.com/@amlhassanabdelhamid" target="_blank" rel="noopener noreferrer"
+          aria-label="Medium">
+          <i class="bi bi-medium"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="back-to-top" href="#" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <script defer src="../assets/js/portfolio-data.js"></script>
+  <script defer src="../assets/js/portfolio-site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX70P7ZG4Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TX70P7ZG4Y');
+  </script>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>My Experience during Summer of Reproducibility with Flower | Aml Hassan Esmail</title>
+  <meta name="description"
+    content="Lessons, experiments, and reproducibility practices from contributing to Flower during the Summer of Reproducibility.">
+
+  <link href="../assets/img/dev_favicon.ico" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+    rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/portfolio-modern.css" rel="stylesheet">
+</head>
+
+<body data-page="article-flower">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Go to homepage">
+        <span class="brand-mark">AE</span>
+        <span class="brand-name" data-profile-name>Aml Hassan Esmail</span>
+      </a>
+
+      <button class="nav-toggle js-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"
+        aria-label="Toggle menu">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <nav class="site-nav" id="site-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+          <li><a href="../blogs.html" class="active">Articles</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-main section">
+    <div class="container">
+      <article class="article-shell">
+        <div class="article-inner">
+          <p class="article-kicker">Open Source and Federated Learning</p>
+          <h1 class="article-title">My Experience during Summer of Reproducibility with Flower</h1>
+          <div class="article-meta">
+            <span class="article-meta-chip"><i class="bi bi-person"></i> Aml Hassan Esmail</span>
+            <span class="article-meta-chip"><i class="bi bi-calendar3"></i> 2023</span>
+            <span class="article-meta-chip"><i class="bi bi-flower1"></i> Flower ecosystem</span>
+          </div>
+          <img class="article-cover" src="https://cdn-images-1.medium.com/max/1024/1*kmVa7GSmGegqQf20_Av-ng.jpeg" alt="Federated learning and experimentation visual"
+            width="1200" height="630">
+
+          <div class="article-body">
+            <h3>How it started</h3><p>I heard about the Summer of Reproducibility at Flower at the start of August 2023, I was interested in it cause it focuses on Federated Learning papers, and yet I was a little bit hesitant about whether should I join it or not given the fact that it started at the first of July and only a handful of papers were left to choose from, so, I entered the slack channel for Summer of Reproducibility and asked if I was too late for the party or not, and the answer was that I’m not too late, so I buckled up and I started that adventure.</p><p>My main task with Flower Labs during my contribution to SoR was to pick a federated learning paper/baseline and build a configurable system using Flower framework that could reproduce the results from the paper that we agreed on and submit it for review.</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*8GuJcYgIoF8Nk0HDYLTdjg.jpeg" /><figcaption>The whole process of SoR</figcaption></figure><h3>The baseline</h3><p>At the start, I was directed to choose from the papers that were already suggested to be included in SoR but since they all needed some strong GPU power that I don’t have I suggested that we look into papers that mix tree-based models with Federated learning -as those usually require less computational power than the one focused on Deep Learning-, we came into agreement that I’ll be working on the paper called: “Gradient-less Federated Gradient Boosting Trees with Learnable Learning Rates” (Chenyang Ma et al., 2023), you can download that paper from <a href="https://arxiv.org/abs/2304.07537">here</a></p><p>The paper that we agreed on -lucky for me :) - has quite a simple and interesting concept, the paper focuses on building a framework for training XGBoost models in a federated learning setting without having to share gradients and it manages to do that by making the learning rates of the aggregated tree ensembles learnable, and it uses a small network to learn those learning rates with the help of the famous <a href="https://arxiv.org/abs/2104.11375">FedAvg</a> algorithm.</p><p>Basically, that’s how the framework should work:</p><p>1- each client is supposed to train an XGBoost tree ensemble with 𝑀<br>trees using its local dataset one time only -at round 0- and then those trained XGBoost tree ensembles should be sent to the server.</p><p>2- The server takes the trained XGBoost tree ensembles and inputs them to a one-layer 1D CNN and using FedAvg, it learns the learning rates that should be assigned to each tree of each XGBoost tree ensemble for each client, and sends that info to the clients.</p><figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*yf4D3W388wvIdtc_caYp-g.png" /><figcaption>Figure from the paper: The framework pipeline. (a) tree ensembles aggregation<br>and (b) one-layer 1D CNN to study the learning rates<br>and output the final prediction result.</figcaption></figure><h3>The coding</h3><p>At the start, Flower provided me with a template baseline that I could edit to add my code.</p><p>I created a Pull Request, initiated it with my work plan -more of a ToDo list actually :) -, and started submitting my coding changes regularly, here’s a link to my PR if you’re interested: <a href="https://github.com/adap/flower/pull/2226">https://github.com/adap/flower/pull/2226</a></p><p>Creating that PR was a really important step as it initiated clear communication and let me get helpful notes regularly from the Flower team — Javier Fernandez-Marques was the one responsible for supervising the SoR so basically he is the one that I refer to when I mention the word “Flower team”-.</p><p>I focused my work on reproducing the results for 6 datasets -out of 12 datasets that were in the paper- from which 3 were binary classification datasets and 3 were regression datasets, and yes as you probably guessed I chose the ones that required the less computational power :)</p><h4>Tools That I used:</h4><p>During my coding journey, I had to deal with new tools, I want to list them down with their usage and the resources that I used to learn them in the hope that they could be useful for some readers:</p><ul><li><strong>Poetry: </strong>that’s a dependency management and packaging tool in Python, I used it to set up my coding environment and track down my packages, it reminded me of Conda, but I think Poetry got a better point over Conda which is fact that it forces the developer to set up a nice environment that contains all the packages that was used during devolving the code which can be useful for the next developer who has to work on that code -you can do so using Conda of course, it just won’t force you to do so- the resources to learn it: <a href="https://python-poetry.org/docs/">Poetry docs</a>.</li><li><strong>Hydra-config: </strong>that’s a configuration management tool, that tool lets me write configurations that can be specified or overridden from the command line and run multiple jobs with different arguments with a single command, the resources I used to learn it: <a href="https://hydra.cc/docs/intro/">Hydra docs</a> and this <a href="https://www.youtube.com/watch?v=zYT_buEw0iE&amp;list=PLNG4feLHqCWlnj8a_E1A_n5zr2-8pafTB&amp;index=9&amp;ab_channel=Flower">YouTube tutorial</a> from the Flower team.</li><li><strong>W&amp;B:</strong> I used this tool to conduct automatic fine-tuning to further enhance the results that the system initially got, it was my very first time using that tool during SoR, the Flower team was the one who advised me to use it, and I did like that tool, W&amp;B, and Hydra-Config was a great combination and it made my fine-tuning process a very smooth one, the resources I used to learn it: <a href="https://colab.research.google.com/github/wandb/examples/blob/master/colabs/pytorch/Organizing_Hyperparameter_Sweeps_in_PyTorch_with_W%26B.ipynb">W&amp;B+PyTorch Notebook</a> and <a href="https://wandb.ai/adrishd/hydra-example/reports/Configuring-W-B-Projects-with-Hydra--VmlldzoxNTA2MzQw">W&amp;B alongside Hydra tutorial</a></li><li><strong>The Flower Framework</strong>: although the fact that I had dealt with the Flower framework before my work with SoR, I still had to learn a lot more about it to finish building that system, the resources I used to learn it: <a href="https://flower.dev/docs/">Flower Docs</a> and the <a href="https://www.youtube.com/@flowerlabs">Flower YouTube channel</a>.</li><li>Although I used them, I already had experience with PyTorch and XGBoost before SoR and they are quite famous so no need to list their usage, but just as a tip take a look at those 2 tutorials: <a href="https://www.youtube.com/watch?v=V_xro1bcAuA&amp;t=15450s&amp;ab_channel=freeCodeCamp.org">PyTorch free codecamp</a> and <a href="https://www.youtube.com/watch?v=OtD8wVaFm6E&amp;list=PLblh5JKOoLULU0irPgs1SnKO6wqVjKUsQ&amp;ab_channel=StatQuestwithJoshStarmer">XGBoost from StatQuest</a> :)</li></ul><h4>Obstacles along the way:</h4><p>During my time contributing to SoR, everything went very smoothly until the moment that the paper started “papering”, if you’re new to dealing with AI papers, let me tell you that from my experience with AI papers they aren’t really that reproducible! There are a lot of reasons for such a curse, take a look at this nice <a href="https://www.mariushobbhahn.com/2020-03-22-case_for_rep_ML/">article</a> for more info.</p><p>The first time I encountered such an issue was while recording the results from the centralized model -which is basically a normal XGBoost- one dataset out of the 6 datasets didn’t give the same results as from the paper, I communicated with the author to see if there was anything wrong but unfortunately he couldn’t spot where the issue was.</p><p>I continued working on the system after that, got the FL model working, and produced good results for the first dataset, second dataset, third dataset, and fourth dataset, and then I ran out of good luck for the last 2 datasets!</p><p>I did everything possible to reproduce the same results from the paper for the last 2 datasets:</p><ul><li>Checked the code multiple times.</li><li>Re-read the paper for a better understanding.</li><li>Communicated with the author asking to check if I got anything wrong.</li><li>Reached out to the Flower team for help and advice.</li><li>conducted a long fine-tuning to find the best possible hyper-parameters.</li></ul><p>However I still didn’t get the same results from the paper for those 2 datasets, I tried to work with a seventh dataset but it was too heavy for my device so I gave up on that one.</p><p>Lucky for me, the Flower team was fine with 4 out of 6 :)</p><p>Of course, due to the fact that I started SoR over a month after its start, my PR wasn’t fully finished at the initial deadline of SoR but again I got lucky and Flower announced the extension of the timeline of SoR!</p><h3>The happy ending</h3><p>And finally, after a lot of reviews, code change requests and 197 commits my PR got merged into Flower 🎉</p><p>I took one of my mentors’ advice and gathered my courage and asked Javier -the Flower team member whom I mostly interacted with during my time working in SoR- for feedback on my work and he gave me nice feedback which gave me more confidence in my work, I also asked him for a LinkedIn recommendation and got it 🎉 Asking for a feedback and/or a recommendation from the people that you worked with is a really important thing, especially if you just got out of college like me and you need some boosting for your career and your confidence :)</p><p>Right after the merging of my PR, I received a mail from Flower with my contribution certificate and a letter stating my reword 2k USD, and actually, that can be considered the very first noticeable money that I make from programming!</p><p>Overall it was a great journey, I’m grateful that I got to go through it, and I believe that what I learned during it made me a better engineer :)</p><p>See you in another article 👋</p>
+          
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">(c) <span data-current-year></span> <span data-profile-name>Aml Hassan Esmail</span>. All
+        rights reserved.</p>
+      <div class="footer-social">
+        <a data-github-url href="https://github.com/Aml-Hassan-Abd-El-hamid" target="_blank" rel="noopener noreferrer"
+          aria-label="GitHub">
+          <i class="bi bi-github"></i>
+        </a>
+        <a data-linkedin-url href="https://www.linkedin.com/in/aml-hassan-esmail/" target="_blank"
+          rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a data-medium-url href="https://medium.com/@amlhassanabdelhamid" target="_blank" rel="noopener noreferrer"
+          aria-label="Medium">
+          <i class="bi bi-medium"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="back-to-top" href="#" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <script defer src="../assets/js/portfolio-data.js"></script>
+  <script defer src="../assets/js/portfolio-site.js"></script>
+</body>
+
+</html>
