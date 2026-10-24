@@ -254,7 +254,7 @@ window.portfolioData = {
   ],
   articles: [
     {
-      title: "OWASP Top 10 for LLM Apps (2026): My 14-Point Security Checklist",
+      title: "Building Secure LLM Applications: A Practical 14-Point Checklist Based on OWASP 2026",
       url: "articles/owasp-llm-security-checklist-2026.html",
       publication: "Portfolio Draft",
       description:

@@ -1,3 +1,4 @@
+@import url("palette.css");
 
 /*--------------------------------------------------------------
 # General
@@ -1443,4 +1444,98 @@ blockquote {
     display: inline-block;
     margin-right: 0;
   }
+}
+
+/* Retain legacy project layouts with the shared portfolio palette. */
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+h1, h2, h3, h4, h5, h6,
+.services-block span,
+.entry-comments-author,
+.rep,
+.content-main .post-meta a {
+  color: var(--ink);
+}
+
+p, .form-control, .navbar a, .navbar a:focus,
+.journal-block .journal-info .journal-txt p,
+#footer .socials-media ul li a {
+  color: var(--muted);
+}
+
+a, a:hover, #header .logo a,
+.navbar a:hover, .navbar .active, .navbar .active:focus,
+.navbar li:hover > a, .navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a,
+.navbar-mobile a:hover, .navbar-mobile .active,
+.navbar-mobile li:hover > a,
+.services-block i,
+.journal-txt h4 a, .journal-txt h4 a:hover,
+.journal-block .journal-info .journal-txt h4 a,
+.journal-block .journal-info .journal-txt h4 a:hover,
+#footer .socials-media ul li a:hover,
+#portfolio #portfolio-flters li:hover,
+#portfolio #portfolio-flters li.filter-active {
+  color: var(--green);
+}
+
+#header, .navbar .dropdown ul, .navbar-mobile ul,
+#journal-blog, .comments, .cmt,
+.container-main .block-main .content-main {
+  background: var(--paper);
+  box-shadow: none;
+}
+
+#header {
+  border-bottom: 1px solid var(--line);
+}
+
+#about, #services, #journal, .main-content, #footer, .breadcrumbs {
+  background: var(--wash);
+}
+
+.portfolio-details .portfolio-info {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.portfolio-details .portfolio-info h3,
+.entry-comments-item, .form-control {
+  border-color: var(--line);
+}
+
+.btn, .back-to-top, .hvr-shutter-in-horizontal::before,
+.hvr-shutter-in-horizontal:hover {
+  background: var(--green);
+}
+
+.btn:hover, .btn:focus, .back-to-top:hover {
+  background: var(--green-dark);
+  color: white;
+}
+
+.services-slider .swiper-pagination .swiper-pagination-bullet,
+.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
+  background: var(--paper);
+  border-color: var(--green);
+}
+
+.services-slider .swiper-pagination .swiper-pagination-bullet-active,
+.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
+  background: var(--green);
+}
+
+blockquote {
+  background: var(--wash);
+  border-color: var(--green);
+}
+
+::selection {
+  background: var(--green);
+  color: white;
 }

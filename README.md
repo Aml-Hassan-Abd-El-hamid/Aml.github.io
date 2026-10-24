@@ -31,7 +31,10 @@ The portfolio is now data-driven for easy updates:
 - `index.html` -> homepage layout
 - `projects.html` -> project listings page
 - `blogs.html` -> article listings page
-- `assets/css/portfolio-modern.css` -> modern styling
+- `assets/css/palette.css` -> shared cream, ink, and green colors for the whole site
+- `assets/css/portfolio-modern.css` -> main portfolio layouts and calm theme
+- `assets/css/article-editorial.css` -> reading-focused layout for the OWASP checklist article
+- `assets/css/style.css` -> legacy project layouts using the same palette
 - `assets/js/portfolio-site.js` -> UI rendering + navigation behavior
 
 ## How to update content quickly

@@ -13,7 +13,7 @@
 
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>OWASP Top 10 for LLM Apps (2026): My 14-Point Security Checklist | Aml Hassan Esmail</title>
+  <title>Building Secure LLM Applications: A Practical 14-Point Checklist Based on OWASP 2026 | Aml Hassan Esmail</title>
   <meta name="description"
     content="A practical 14-point checklist for building safer LLM-powered applications, based on the OWASP GenAI LLM Top 10 (2026).">
 
@@ -26,10 +26,11 @@
 
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/css/portfolio-modern.css" rel="stylesheet">
+  <link href="../assets/css/article-editorial.css" rel="stylesheet">
 </head>
 
 <body data-page="article-owasp-llm-checklist">
+  <a class="skip-link" href="#article-content">Skip to article</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../index.html" aria-label="Go to homepage">
@@ -58,58 +59,64 @@
       <article class="article-shell">
         <div class="article-inner">
           <p class="article-kicker">LLM Security</p>
-          <h1 class="article-title">OWASP Top 10 for LLM Apps (2026): My 14-Point Security Checklist</h1>
+          <h1 class="article-title">Building Secure LLM Applications: A Practical 14-Point Checklist Based on OWASP 2026</h1>
           <div class="article-meta">
             <span class="article-meta-chip"><i class="bi bi-person"></i> Aml Hassan Esmail</span>
             <span class="article-meta-chip"><i class="bi bi-calendar3"></i> Draft - 2026</span>
             <span class="article-meta-chip"><i class="bi bi-shield-check"></i> OWASP GenAI</span>
           </div>
-          <img class="article-cover" src="../assets/img/data-background2.jpg"
-            alt="Security-themed abstract background for LLM application safety checklist" width="1200" height="630">
-
-          <div class="article-body">
+          <div class="article-intro">
             <p>I started this article while reading the OWASP Top 10 for LLM Applications 2026, I was trying to learn more about how to make a secure LLM powered applications.<br>The OWASP Top 10 for LLM Applications 2026 is a collection of 10 articles that discuss 10 different security issues related to LLM-powered applications, each article contains an issue and a list of strategies to help prevent that issue.<br>I was taking notes while reading to try and build a ToDo list of elements to check every time I build an LLM-powered app to make sure it follows the basic security rules, and ones the list was done I decided to share it so others can use it, I still highly recommend reading the full ten articles to get to know more about each security issue in details, You can download the PDF that contains the articles from here: <a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/">OWASP GenAI LLM Top 10 2026 - OWASP Gen AI Security Project</a><br>I divided my list into 4 buckets with 14 points -a lot of points, I know :) - I discuss every point below but you can see the entire list with no details here here:</p>
+          </div>
+          <div class="article-layout">
+            <details class="article-contents" open>
+              <summary>Jump to a checklist item</summary>
+              <nav aria-label="Article checklist">
+                <h2>The checklist</h2>
             <ul class="quick-bucket-list">
               <li>
                 <strong>Access:</strong>
                 <ol class="quick-bucket-points">
-                  <li><strong>Least Privilege / Minimize Scope, Tools &amp; Permissions and enforce that</strong></li>
-                  <li><strong>Server-Side, Chunk/Tenant-Level Access Control for Retrieval (RAG/Vector)</strong></li>
-                  <li><strong>Human-in-the-Loop Approval for High-Impact/Irreversible Actions</strong></li>
-                  <li><strong>Sandboxing &amp; Isolation of Untrusted Data/Tools/Execution</strong></li>
+                  <li><a href="#point-1">Least Privilege / Minimize Scope, Tools &amp; Permissions and enforce that</a></li>
+                  <li><a href="#point-2">Server-Side, Chunk/Tenant-Level Access Control for Retrieval (RAG/Vector)</a></li>
+                  <li><a href="#point-3">Human-in-the-Loop Approval for High-Impact/Irreversible Actions</a></li>
+                  <li><a href="#point-4">Sandboxing &amp; Isolation of Untrusted Data/Tools/Execution</a></li>
                 </ol>
               </li>
               <li>
                 <strong>Input:</strong>
                 <ol class="quick-bucket-points" start="5">
-                  <li><strong>No Secrets or Sensitive Data in Prompts/Hidden Context</strong></li>
-                  <li><strong>Input Validation &amp; Sanitization</strong></li>
-                  <li><strong>Trust-Boundary Separation &amp; Provenance Labeling</strong></li>
+                  <li><a href="#point-5">No Secrets or Sensitive Data in Prompts/Hidden Context</a></li>
+                  <li><a href="#point-6">Input Validation &amp; Sanitization</a></li>
+                  <li><a href="#point-7">Trust-Boundary Separation &amp; Provenance Labeling</a></li>
                 </ol>
               </li>
               <li>
                 <strong>Output:</strong>
                 <ol class="quick-bucket-points" start="8">
-                  <li><strong>Output Schema Validation, Encoding &amp; Safe Rendering</strong></li>
-                  <li><strong>Grounding / Verify-Before-Act (Claim-Check-Act)</strong></li>
+                  <li><a href="#point-8">Output Schema Validation, Encoding &amp; Safe Rendering</a></li>
+                  <li><a href="#point-9">Grounding / Verify-Before-Act (Claim-Check-Act)</a></li>
                 </ol>
               </li>
               <li>
                 <strong>Ops:</strong>
                 <ol class="quick-bucket-points" start="10">
-                  <li><strong>Rate Limiting, Quotas &amp; Spending/Resource Caps</strong></li>
-                  <li><strong>Know &amp; Verify What You&#x27;re Building On</strong></li>
-                  <li><strong>Test Your Defenses Like an Attacker Would</strong></li>
-                  <li><strong>Monitoring, Logging, Anomaly Detection &amp; Incident Response</strong></li>
-                  <li><strong>Protect Your Data Wherever It Goes</strong></li>
+                  <li><a href="#point-10">Rate Limiting, Quotas &amp; Spending/Resource Caps</a></li>
+                  <li><a href="#point-11">Know &amp; Verify What You&#x27;re Building On</a></li>
+                  <li><a href="#point-12">Test Your Defenses Like an Attacker Would</a></li>
+                  <li><a href="#point-13">Monitoring, Logging, Anomaly Detection &amp; Incident Response</a></li>
+                  <li><a href="#point-14">Protect Your Data Wherever It Goes</a></li>
                 </ol>
               </li>
 
             </ul>
-            <h3>Access:</h3>
+              </nav>
+            </details>
+          <div class="article-body" id="article-content" tabindex="-1">
+            <h2>Access:</h2>
             <ol class="security-point-list">
               <li class="security-point">
-                <h4>Least Privilege / Minimize Scope, Tools &amp; Permissions and enforce that</h4>
+                <h3 id="point-1">Least Privilege / Minimize Scope, Tools &amp; Permissions and enforce that</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -122,7 +129,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Server-Side, Chunk/Tenant-Level Access Control for Retrieval (RAG/Vector)</h4>
+                <h3 id="point-2">Server-Side, Chunk/Tenant-Level Access Control for Retrieval (RAG/Vector)</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -134,7 +141,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Human-in-the-Loop Approval for High-Impact/Irreversible Actions</h4>
+                <h3 id="point-3">Human-in-the-Loop Approval for High-Impact/Irreversible Actions</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -146,7 +153,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Sandboxing &amp; Isolation of Untrusted Data/Tools/Execution</h4>
+                <h3 id="point-4">Sandboxing &amp; Isolation of Untrusted Data/Tools/Execution</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -159,10 +166,10 @@
             </ul>
             </li>
             </ol>
-            <h3>Input:</h3>
+            <h2>Input:</h2>
             <ol class="security-point-list" start="5">
               <li class="security-point">
-                <h4>No Secrets or Sensitive Data in Prompts/Hidden Context</h4>
+                <h3 id="point-5">No Secrets or Sensitive Data in Prompts/Hidden Context</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -176,7 +183,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Input Validation &amp; Sanitization</h4>
+                <h3 id="point-6">Input Validation &amp; Sanitization</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -192,7 +199,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Trust-Boundary Separation &amp; Provenance Labeling</h4>
+                <h3 id="point-7">Trust-Boundary Separation &amp; Provenance Labeling</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -204,10 +211,10 @@
             </ul>
             </li>
             </ol>
-            <h3>Output</h3>
+            <h2>Output</h2>
             <ol class="security-point-list" start="8">
               <li class="security-point">
-                <h4>Output Schema Validation, Encoding &amp; Safe Rendering</h4>
+                <h3 id="point-8">Output Schema Validation, Encoding &amp; Safe Rendering</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -225,7 +232,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Grounding / Verify-Before-Act (&quot;Claim-Check-Act&quot;)</h4>
+                <h3 id="point-9">Grounding / Verify-Before-Act (&quot;Claim-Check-Act&quot;)</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -237,10 +244,10 @@
             </ul>
             </li>
             </ol>
-            <h3>Ops</h3>
+            <h2>Ops</h2>
             <ol class="security-point-list" start="10">
               <li class="security-point">
-                <h4>Rate Limiting, Quotas &amp; Spending/Resource Caps</h4>
+                <h3 id="point-10">Rate Limiting, Quotas &amp; Spending/Resource Caps</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -252,7 +259,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Know &amp; Verify What You&#x27;re Building On</h4>
+                <h3 id="point-11">Know &amp; Verify What You&#x27;re Building On</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -265,7 +272,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Test Your Defenses Like an Attacker Would</h4>
+                <h3 id="point-12">Test Your Defenses Like an Attacker Would</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -278,7 +285,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Monitoring, Logging, Anomaly Detection &amp; Incident Response</h4>
+                <h3 id="point-13">Monitoring, Logging, Anomaly Detection &amp; Incident Response</h3>
             <ul>
               <li><strong>Why:</strong></li>
             </ul>
@@ -290,7 +297,7 @@
             </ul>
             </li>
               <li class="security-point">
-                <h4>Protect Your Data Wherever It Goes</h4>
+                <h3 id="point-14">Protect Your Data Wherever It Goes</h3>
             <p><em>Mentions: LLM02 Tier1 #7, Tier3 #1; LLM04 #7; LLM09 #5</em></p>
             <ul>
               <li><strong>Why:</strong></li>
@@ -306,6 +313,7 @@
             </ol>
             <p>If you got to the end of the article, then I want to congratulate you and say thank you so much, I know that those are lots of points to go through :) I hope you enjoyed reading them and I hope that this list can be helpful for you. If you got any points that you want to add or have any comments or feedbacks, please let me know<br>My LinkedIn: <a href="https://www.linkedin.com/in/aml-hassan-esmail/">Aml Hassan Esmail | LinkedIn</a><br>My email: aml.hassan.esmil@gmail.com</p>
           </div>
+          </div>
         </div>
       </article>
     </div>
@@ -313,7 +321,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> <span data-profile-name>Aml Hassan Esmail</span>. Built for fast iteration and
+      <p>© <span data-current-year></span> <span data-profile-name>Aml Hassan Esmail</span>. Built for fast iteration and
         clean storytelling.</p>
       <div class="footer-socials">
         <a data-linkedin-url href="https://www.linkedin.com/in/aml-hassan-esmail/" target="_blank"
@@ -334,6 +342,13 @@
 
   <script defer src="../assets/js/portfolio-data.js"></script>
   <script defer src="../assets/js/portfolio-site.js"></script>
+  <script>
+    const contents = document.querySelector(".article-contents");
+    const mobileLayout = window.matchMedia("(max-width: 700px)");
+    const updateContents = () => { contents.open = !mobileLayout.matches; };
+    updateContents();
+    mobileLayout.addEventListener("change", updateContents);
+  </script>
 </body>
 
 </html>

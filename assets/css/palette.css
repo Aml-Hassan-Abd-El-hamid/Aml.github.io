@@ -1,0 +1,24 @@
+:root {
+  color-scheme: light;
+  --paper: #faf9f5;
+  --ink: #23332d;
+  --muted: #52635b;
+  --green: #245943;
+  --green-dark: #193f30;
+  --line: #d8ded5;
+  --wash: #edf1e9;
+}
+
+::selection {
+  background: var(--green);
+  color: white;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 5px;
+  box-shadow: none;
+}
