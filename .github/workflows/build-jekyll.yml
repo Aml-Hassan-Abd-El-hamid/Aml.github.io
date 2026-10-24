@@ -8,13 +8,16 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        timeout-minutes: 5
 
       # Use GitHub Actions' cache to cache dependencies on servers
       - uses: actions/cache@v4
+        timeout-minutes: 5
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
@@ -22,7 +25,8 @@ jobs:
             ${{ runner.os }}-gems-
 
       # Use GitHub Deploy Action to build and deploy to Github
-      - uses: jeffreytse/jekyll-deploy-action@master
+      - uses: jeffreytse/jekyll-deploy-action@222a6b06c846416d654db18142eab0da528cdb4f # v0.7.0
+        timeout-minutes: 12
         with:
           provider: 'github'
           token: ${{ secrets.GITHUB_TOKEN }}
