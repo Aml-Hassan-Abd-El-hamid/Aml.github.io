@@ -70,6 +70,9 @@ The portfolio is now data-driven for easy updates:
 
 ## Performance notes
 
+- Local theme stylesheet links and their shared palette import use a `?v=` release
+  token to avoid stale styles after deployment. Bump these tokens together when
+  publishing future theme changes.
 - The main pages use lightweight custom JS/CSS with deferred scripts.
 - Unused heavy template libraries are not loaded on the main portfolio pages.
 - Content rendering happens from a single local data file for simpler maintenance.
