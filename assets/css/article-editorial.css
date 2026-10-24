@@ -59,6 +59,8 @@ a:focus-visible, summary:focus-visible, button:focus-visible {
 .security-point ul { padding-left: 1.3rem; margin: .4rem 0 1.2rem; }
 .security-point ul li { padding-left: .2rem; margin-bottom: .7rem; }
 .security-point ul li::marker { color: var(--green); }
+.security-point > ul:first-of-type + p { margin-inline-start: 2.9rem; }
+.security-point > ul > li:not(:has(> strong:only-child)) { margin-inline-start: 1.4rem; }
 .security-point strong { color: var(--green); }
 .security-point > p:has(> em:only-child) { color: var(--muted); font-size: .8rem; border-left: 2px solid var(--line); padding-left: .8rem; }
 code { color: var(--ink); font: .88em/1.5 Consolas, monospace; background: var(--wash); padding: .1em .3em; border-radius: 4px; }
